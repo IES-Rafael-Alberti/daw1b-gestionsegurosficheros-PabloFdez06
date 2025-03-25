@@ -18,6 +18,24 @@ class SeguroHogar: Seguro {
         fun obtenerNumPolizaHogar(): Int {
             return numPolizasHogar++
         }
+
+        fun crearSeguro(datos: List<String>) : SeguroHogar?{
+
+            try { // controlar fuera, donde pedimos el seguro.
+                if (datos.size == 7) {
+                    datos[0].toInt()
+                    datos[1].isNotEmpty()
+                    datos[2].toDouble()
+                    datos[3].toInt()
+                    datos[4].toInt()
+                    datos[5].isNotEmpty()
+                    LocalDate.parse(datos[6])
+                }
+            } catch (e: IllegalArgumentException) {
+                return null
+            }
+            return // TODO
+        }
     }
 
 
@@ -32,10 +50,10 @@ class SeguroHogar: Seguro {
 
     private constructor(numPoliza: Int, dniTitular: String, importe: Double, metrosCuadrados: Int, valorContenido: Int, direccion: String, anioConstruccion: LocalDate) :
             super(numPoliza, dniTitular, importe) {
-        this.metrosCuadrados = metrosCuadrados
-        this.valorContenido = valorContenido
-        this.direccion = direccion
-        this.anioConstruccion = anioConstruccion
+                this.metrosCuadrados = metrosCuadrados
+                this.valorContenido = valorContenido
+                this.direccion = direccion
+                this.anioConstruccion = anioConstruccion
     }
 
     override fun calcularImporteAnioSiguiente(interes: Double): Double {
