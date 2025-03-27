@@ -6,15 +6,13 @@ abstract class Seguro(
     var importe: Double
 ) : IExportable {
 
-    companion object {
-        var numPolizasAuto = 400000
-        var numPolizasHogar = 100000
-        var numPolizasVida = 800000
-    }
+
 
     abstract fun calcularImporteAnioSiguiente(interes: Double): Double
 
-    abstract fun tipoSeguro(): String
+    fun tipoSeguro(): String {
+        return this::class.simpleName ?: "Desconocido"
+    }
 
     override fun serializar(separador: String): String {
         return "$numPoliza$separador$dniTitular$separador$importe"
@@ -25,13 +23,12 @@ abstract class Seguro(
     }
 
     override fun hashCode(): Int {
-        return numPoliza
+        return numPoliza.hashCode()
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || javaClass != other.javaClass) return false
-        val seguro = other as Seguro
-        return numPoliza == seguro.numPoliza
+        if (other !is Seguro) return false
+        return numPoliza == other.numPoliza
     }
 }
