@@ -79,6 +79,6 @@ class SeguroAuto: Seguro {
     }
 
     override fun toString(): String {
-        return "SeguroAuto(numPoliza = ${super.numPoliza}, dniTitular = ${super.dniTitular}, importe = ${"%.2f".format(super.importe)} descripcion = $descripcion, combustible = $combustible, tipoAuto = $tipoAuto, cobertura = $cobertura, asistenciaCarretera = $asistenciaCarretera, numPartes = $numPartes)"
+        return "SeguroAuto(numPoliza = ${numPoliza}, dniTitular = ${dniTitular}, importe = ${"%.2f".format(super.importe)} descripcion = $descripcion, combustible = $combustible, tipoAuto = $tipoAuto, cobertura = $cobertura, asistenciaCarretera = $asistenciaCarretera, numPartes = $numPartes)"
     }
 }

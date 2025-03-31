@@ -4,15 +4,14 @@ import model.Perfil
 import model.Usuario
 
 
-class RepoUsuariosMem : IRepoUsuarios {
-    private val usuarios = mutableListOf<Usuario>()
+open class RepoUsuariosMem : IRepoUsuarios {
+    protected val usuarios = mutableListOf<Usuario>()
 
     override fun agregar(usuario: Usuario): Boolean {
         if (buscar(usuario.nombre) != null) {
             return false
         }
-        usuarios.add(usuario)
-        return true
+        return usuarios.add(usuario)
     }
 
     override fun buscar(nombreUsuario: String): Usuario? {
@@ -37,6 +36,7 @@ class RepoUsuariosMem : IRepoUsuarios {
     }
 
     override fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean {
-        return usuario.cambiarClave(nuevaClave)
+        usuario.cambiarClave(nuevaClave)
+        return true
     }
 }

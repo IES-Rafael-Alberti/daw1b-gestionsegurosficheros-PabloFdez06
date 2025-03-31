@@ -1,7 +1,9 @@
 package model
 
-class Usuario(val nombre: String, private var clave: String, val perfil: Perfil) : IExportable {
+class Usuario(val nombre: String, clave: String, val perfil: Perfil) : IExportable {
 
+    var clave: String = clave
+        private set
 
     init {
         require(nombre.isNotBlank()) { "El nombre no puede estar vacío" }
@@ -29,5 +31,9 @@ class Usuario(val nombre: String, private var clave: String, val perfil: Perfil)
 
     override fun serializar(separador: String): String {
         return "$nombre$separador$clave$separador$perfil"
+    }
+
+    override fun toString(): String {
+        return "Usuario (nombre=$nombre, clave='$clave', perfil=$perfil"
     }
 }

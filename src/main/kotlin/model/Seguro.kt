@@ -3,7 +3,7 @@ package model
 abstract class Seguro(
     val numPoliza: Int,
     val dniTitular: String,
-    var importe: Double
+    protected val importe: Double
 ) : IExportable {
 
 
