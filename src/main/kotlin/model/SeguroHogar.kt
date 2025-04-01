@@ -1,6 +1,7 @@
 package model
 
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class SeguroHogar: Seguro {
@@ -18,28 +19,40 @@ class SeguroHogar: Seguro {
 
 
         fun crearSeguro(datos: List<String>) : SeguroHogar? {
-            return try {
-                if (datos.size < 7) return null
+//            return try {
+//                if (datos.size < 7) return null
+//
+//                val numPoliza = datos[0].toInt()
+//                val dniTitular = datos[1]
+//                val importe = datos[2].toDouble()
+//                val metrosCuadrados = datos[3].toInt()
+//                val valorContenido = datos[4].toDouble()
+//                val direccion = datos[5]
+//                val anioConstruccion = LocalDate.parse(datos[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+//
+//
+//                SeguroHogar(numPoliza, dniTitular, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
+//            } catch (e: Exception) {
+//                null
+//            }
+//
+//
 
-                val numPoliza = datos[0].toInt()
-                val dniTitular = datos[1]
-                val importe = datos[2].toDouble()
-                val metrosCuadrados = datos[3].toInt()
-                val valorContenido = datos[4].toDouble()
-                val direccion = datos[5]
-                val anioConstruccion = LocalDate.parse(datos[6])
-
-
-                SeguroHogar(numPoliza, dniTitular, importe, metrosCuadrados, valorContenido, direccion, anioConstruccion)
-            } catch (e: Exception) {
-                null
-            }
+            return SeguroHogar(
+                numPoliza = datos[0].toInt(),
+                dniTitular = datos[1],
+                importe = datos[2].toDouble(),
+                metrosCuadrados = datos[3].toInt(),
+                valorContenido = datos[4].toDouble(),
+                direccion = datos[5],
+                anioConstruccion = LocalDate.parse(datos[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            )
         }
     }
 
 
     constructor(dniTitular: String, importe: Double, metrosCuadrados: Int, valorContenido: Double, direccion: String, anioConstruccion: LocalDate) :
-            super(numPoliza = numPolizasHogar++, dniTitular, importe) {
+            super(numPoliza = ++numPolizasHogar, dniTitular, importe) {
                 this.metrosCuadrados = metrosCuadrados
                 this.valorContenido = valorContenido
                 this.direccion = direccion

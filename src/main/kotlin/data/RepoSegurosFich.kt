@@ -30,7 +30,7 @@ class RepoSegurosFich(
     }
 
     override fun cargarSeguros(mapa: Map<String, (List<String>) -> Seguro>): Boolean {
-        val lineas = fich.leerArchivo(rutaArchivo) ?: return false
+        val lineas = fich.leerArchivo(rutaArchivo)
 
         if (lineas.isNotEmpty()) {
             seguros.clear()

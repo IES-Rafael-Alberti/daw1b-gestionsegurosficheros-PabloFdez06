@@ -5,6 +5,7 @@ import model.Cobertura
 import model.Riesgo
 import model.Seguro
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class SeguroVida : Seguro {
 
@@ -21,25 +22,34 @@ class SeguroVida : Seguro {
 
 
         fun crearSeguro(datos: List<String>) : SeguroVida? {
-            return try {
-                if (datos.size < 6) return null
+//            return try {
+//                if (datos.size < 6) return null
+//
+//                val numPoliza = datos[0].toInt()
+//                val dniTitular = datos[1]
+//                val importe = datos[2].toDouble()
+//                val fechaNac = LocalDate.parse(datos[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+//                val nivelRiesgo = Riesgo.getRiesgo(datos[4])
+//                val indemnizacion = datos[5].toDouble()
+//
+//                SeguroVida(numPoliza, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion)
+//            } catch (e: Exception) {
+//                null
+//            }
 
-                val numPoliza = datos[0].toInt()
-                val dniTitular = datos[1]
-                val importe = datos[2].toDouble()
-                val fechaNac = LocalDate.parse(datos[3])
-                val nivelRiesgo = Riesgo.getRiesgo(datos[4])
-                val indemnizacion = datos[5].toDouble()
-
-                SeguroVida(numPoliza, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion)
-            } catch (e: Exception) {
-                null
-            }
+            return SeguroVida(
+                numPoliza = datos[0].toInt(),
+                dniTitular = datos[1],
+                importe = datos[2].toDouble(),
+                fechaNac = LocalDate.parse(datos[3], DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                nivelRiesgo = Riesgo.getRiesgo(datos[4]),
+                indemnizacion = datos[5].toDouble()
+            )
         }
     }
 
     constructor(dniTitular: String, importe: Double, fechaNac: LocalDate, nivelRiesgo: Riesgo, indemnizacion: Double) :
-            super(numPoliza = numPolizaVida++, dniTitular, importe) {
+            super(numPoliza = ++numPolizaVida, dniTitular, importe) {
 
         this.fechaNac = fechaNac
         this.nivelRiesgo = nivelRiesgo

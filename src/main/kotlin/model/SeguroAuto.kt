@@ -23,24 +23,36 @@ class SeguroAuto: Seguro {
 
 
         fun crearSeguro(datos: List<String>) : SeguroAuto? {
-            return try {
-                if (datos.size < 9) return null
+//            return try {
+//                if (datos.size < 9) return null
+//
+//                val numPoliza = datos[0].toInt()
+//                val dniTitular = datos[1]
+//                val importe = datos[2].toDouble()
+//                val descripcion = datos[3]
+//                val combustible = datos[4]
+//                val tipoAuto = Auto.getAuto(datos[5])
+//                val cobertura = Cobertura.getCobertura(datos[6])
+//                val asistenciaCarretera = datos[7].toBoolean()
+//                val numPartes = datos[8].toInt()
+//
+//
+//                SeguroAuto(numPoliza, dniTitular, importe, descripcion, combustible, tipoAuto, cobertura, asistenciaCarretera, numPartes)
+//            } catch (e: Exception) {
+//                null
+//            }
 
-                val numPoliza = datos[0].toInt()
-                val dniTitular = datos[1]
-                val importe = datos[2].toDouble()
-                val descripcion = datos[3]
-                val combustible = datos[4]
-                val tipoAuto = Auto.getAuto(datos[5])
-                val cobertura = Cobertura.getCobertura(datos[6])
-                val asistenciaCarretera = datos[7].toBoolean()
-                val numPartes = datos[8].toInt()
-
-
-                SeguroAuto(numPoliza, dniTitular, importe, descripcion, combustible, tipoAuto, cobertura, asistenciaCarretera, numPartes)
-            } catch (e: Exception) {
-                null
-            }
+            return SeguroAuto(
+                numPoliza = datos[0].toInt(),
+                dniTitular = datos[1],
+                importe = datos[2].toDouble(),
+                descripcion = datos[3],
+                combustible = datos[4],
+                tipoAuto = Auto.getAuto(datos[5]),
+                cobertura = Cobertura.getCobertura(datos[6]),
+                asistenciaCarretera = datos[7].toBoolean(),
+                numPartes = datos[8].toInt()
+            )
         }
     }
 
