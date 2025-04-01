@@ -10,7 +10,7 @@ class SeguroVida : Seguro {
 
     private var fechaNac: LocalDate
     private var nivelRiesgo: Riesgo
-    private var indemnizacion: Int
+    private var indemnizacion: Double
 
 
 
@@ -29,7 +29,7 @@ class SeguroVida : Seguro {
                 val importe = datos[2].toDouble()
                 val fechaNac = LocalDate.parse(datos[3])
                 val nivelRiesgo = Riesgo.getRiesgo(datos[4])
-                val indemnizacion = datos[5].toInt()
+                val indemnizacion = datos[5].toDouble()
 
                 SeguroVida(numPoliza, dniTitular, importe, fechaNac, nivelRiesgo, indemnizacion)
             } catch (e: Exception) {
@@ -38,7 +38,7 @@ class SeguroVida : Seguro {
         }
     }
 
-    constructor(dniTitular: String, importe: Double, fechaNac: LocalDate, nivelRiesgo: Riesgo, indemnizacion: Int) :
+    constructor(dniTitular: String, importe: Double, fechaNac: LocalDate, nivelRiesgo: Riesgo, indemnizacion: Double) :
             super(numPoliza = numPolizaVida++, dniTitular, importe) {
 
         this.fechaNac = fechaNac
@@ -48,7 +48,7 @@ class SeguroVida : Seguro {
 
     }
 
-    private constructor(numPoliza: Int, dniTitular: String, importe: Double, fechaNac: LocalDate, nivelRiesgo: Riesgo, indemnizacion: Int) :
+    private constructor(numPoliza: Int, dniTitular: String, importe: Double, fechaNac: LocalDate, nivelRiesgo: Riesgo, indemnizacion: Double) :
             super(numPoliza, dniTitular, importe) {
 
         this.fechaNac = fechaNac

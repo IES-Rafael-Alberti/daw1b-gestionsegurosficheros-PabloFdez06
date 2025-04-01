@@ -5,7 +5,7 @@ import java.time.LocalDate
 
 class SeguroHogar: Seguro {
     private var metrosCuadrados: Int
-    private var valorContenido: Int
+    private var valorContenido: Double
     private var direccion: String
     private var anioConstruccion: LocalDate
 
@@ -25,7 +25,7 @@ class SeguroHogar: Seguro {
                 val dniTitular = datos[1]
                 val importe = datos[2].toDouble()
                 val metrosCuadrados = datos[3].toInt()
-                val valorContenido = datos[4].toInt()
+                val valorContenido = datos[4].toDouble()
                 val direccion = datos[5]
                 val anioConstruccion = LocalDate.parse(datos[6])
 
@@ -38,7 +38,7 @@ class SeguroHogar: Seguro {
     }
 
 
-    constructor(dniTitular: String, importe: Double, metrosCuadrados: Int, valorContenido: Int, direccion: String, anioConstruccion: LocalDate) :
+    constructor(dniTitular: String, importe: Double, metrosCuadrados: Int, valorContenido: Double, direccion: String, anioConstruccion: LocalDate) :
             super(numPoliza = numPolizasHogar++, dniTitular, importe) {
                 this.metrosCuadrados = metrosCuadrados
                 this.valorContenido = valorContenido
@@ -47,7 +47,7 @@ class SeguroHogar: Seguro {
             }
 
 
-    private constructor(numPoliza: Int, dniTitular: String, importe: Double, metrosCuadrados: Int, valorContenido: Int, direccion: String, anioConstruccion: LocalDate) :
+    private constructor(numPoliza: Int, dniTitular: String, importe: Double, metrosCuadrados: Int, valorContenido: Double, direccion: String, anioConstruccion: LocalDate) :
             super(numPoliza, dniTitular, importe) {
                 this.metrosCuadrados = metrosCuadrados
                 this.valorContenido = valorContenido

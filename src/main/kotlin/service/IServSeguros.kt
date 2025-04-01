@@ -10,7 +10,7 @@ interface IServSeguros {
         metrosCuadrados: Int,
         valorContenido: Double,
         direccion: String,
-        anioConstruccion: Int
+        anioConstruccion: LocalDate
     ): Boolean
 
     fun contratarSeguroAuto(

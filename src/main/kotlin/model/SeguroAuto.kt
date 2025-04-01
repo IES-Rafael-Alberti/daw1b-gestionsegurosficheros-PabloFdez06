@@ -10,7 +10,7 @@ import java.time.LocalDate
 class SeguroAuto: Seguro {
 
     private var descripcion: String
-    private var combustible: Int
+    private var combustible: String
     private var tipoAuto: Auto
     private var cobertura: Cobertura
     private var asistenciaCarretera: Boolean
@@ -30,7 +30,7 @@ class SeguroAuto: Seguro {
                 val dniTitular = datos[1]
                 val importe = datos[2].toDouble()
                 val descripcion = datos[3]
-                val combustible = datos[4].toInt()
+                val combustible = datos[4]
                 val tipoAuto = Auto.getAuto(datos[5])
                 val cobertura = Cobertura.getCobertura(datos[6])
                 val asistenciaCarretera = datos[7].toBoolean()
@@ -44,7 +44,7 @@ class SeguroAuto: Seguro {
         }
     }
 
-    constructor(dniTitular: String, importe: Double, descripcion: String, combustible: Int, tipoAuto: Auto, cobertura: Cobertura, asistenciaCarretera: Boolean, numPartes: Int) :
+    constructor(dniTitular: String, importe: Double, descripcion: String, combustible: String, tipoAuto: Auto, cobertura: Cobertura, asistenciaCarretera: Boolean, numPartes: Int) :
             super(numPoliza = numPolizaAuto++, dniTitular, importe) {
 
                 this.descripcion = descripcion
@@ -56,7 +56,7 @@ class SeguroAuto: Seguro {
 
     }
 
-    private constructor(numPoliza: Int, dniTitular: String, importe: Double, descripcion: String, combustible: Int, tipoAuto: Auto, cobertura: Cobertura, asistenciaCarretera: Boolean, numPartes: Int) :
+    private constructor(numPoliza: Int, dniTitular: String, importe: Double, descripcion: String, combustible: String, tipoAuto: Auto, cobertura: Cobertura, asistenciaCarretera: Boolean, numPartes: Int) :
             super(numPoliza, dniTitular, importe) {
 
         this.descripcion = descripcion

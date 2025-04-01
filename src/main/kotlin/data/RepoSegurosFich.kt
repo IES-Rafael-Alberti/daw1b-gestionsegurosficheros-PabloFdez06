@@ -6,6 +6,7 @@ import data.RepoUsuariosMem
 import model.Seguro
 import model.SeguroHogar
 import model.Usuario
+import org.example.Utils.IUtilFicheros
 import org.example.model.SeguroAuto
 import org.example.model.SeguroVida
 
@@ -29,16 +30,22 @@ class RepoSegurosFich(
     }
 
     override fun cargarSeguros(mapa: Map<String, (List<String>) -> Seguro>): Boolean {
-        val lineas = fich.leerSeguros(rutaArchivo)
+        val lineas = fich.leerArchivo(rutaArchivo) ?: return false
 
         if (lineas.isNotEmpty()) {
             seguros.clear()
             for (linea in lineas) {
                 val datos = linea.split(";")
-                if (datos.size == 3){
-                    seguros.add(Seguro().)
+                if (datos.isNotEmpty()) {
+                    val tipo = datos[0]
+                    val parametros = datos.drop(1)
+                    val seguro = mapa[tipo]?.invoke(parametros)
+                    if (seguro != null) {
+                        super.agregar(seguro)
+                    }
                 }
             }
+            actualizarContadores(seguros)
             return seguros.isNotEmpty()
         }
         return false

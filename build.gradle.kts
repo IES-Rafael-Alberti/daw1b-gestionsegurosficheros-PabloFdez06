@@ -11,6 +11,11 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+
+
+    testImplementation(kotlin("test"))
+    implementation("at.favre.lib:bcrypt:0.9.0")
+
 }
 
 tasks.test {
