@@ -32,22 +32,44 @@ class Consola : IEntradaSalida {
         return valor
     }
 
-    override fun pedirDouble(
-        prompt: String,
-        error: String,
-        errorConv: String,
-        debeCumplir: (Double) -> Boolean
-    ): Double {
-        TODO("Not yet implemented")
+    override fun pedirDouble(prompt: String, error: String, errorConv: String, debeCumplir: (Double) -> Boolean): Double {
+
+        var entrada: String
+        var num: Double? = null
+
+        do {
+            entrada = pedirInfo(prompt)
+
+            entrada = entrada.replace(',', '.')
+
+            try {
+                num = entrada.toDoubleOrNull() ?: throw IllegalArgumentException(errorConv)
+                require(debeCumplir(num)) { error }
+
+            } catch (e: Exception) {
+                mostrarError(e.message.toString())
+            }
+        } while (num == null)
+        return num
     }
 
-    override fun pedirEntero(
-        prompt: String,
-        error: String,
-        errorConv: String,
-        debeCumplir: (Int) -> Boolean
-    ): Int {
-        TODO("Not yet implemented")
+    override fun pedirEntero(prompt: String, error: String, errorConv: String, debeCumplir: (Int) -> Boolean): Int {
+
+        var entrada: String
+        var num: Int? = null
+
+        do {
+            entrada = pedirInfo(prompt)
+
+            try {
+                num = entrada.toIntOrNull() ?: throw IllegalArgumentException(errorConv)
+                require(debeCumplir(num)) { error }
+
+            } catch (e: Exception) {
+                mostrarError(e.message.toString())
+            }
+        } while (num == null)
+        return num
     }
 
     override fun pedirInfoOculta(prompt: String): String {
