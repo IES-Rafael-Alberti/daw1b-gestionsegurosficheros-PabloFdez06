@@ -1,5 +1,9 @@
-package org.example.app
+package app
 
+import model.Perfil
+import org.example.UI.IEntradaSalida
+import org.example.Utils.IUtilFicheros
+import service.IServUsuarios
 /**
  * Clase responsable del control de acceso de usuarios: alta inicial, inicio de sesión
  * y recuperación del perfil. Su objetivo es asegurar que al menos exista un usuario
@@ -19,8 +23,12 @@ package org.example.app
  * @property ui Interfaz para mostrar mensajes y recoger entradas del usuario.
  * @property ficheros Utilidad para operar con ficheros (leer, comprobar existencia...).
  */
-class ControlAcceso
-{
+class ControlAcceso(
+    private val rutaArchivo: String,
+    private val gestorUsuarios: IServUsuarios,
+    private val ui: IEntradaSalida,
+    private val ficheros: IUtilFicheros
+) {
 
     /**
      * Inicia el proceso de autenticación del sistema.
@@ -33,8 +41,11 @@ class ControlAcceso
      *
      * @return Un par (nombreUsuario, perfil) si el acceso fue exitoso, o `null` si el usuario cancela el acceso.
      */
-    fun autenticar() {
-        TODO("Implementar este método")
+    fun autenticar(): Pair<String, String>? {
+        if (!verificarFicheroUsuarios()) {
+            return null
+        }
+        return iniciarSesion()
     }
 
     /**
@@ -48,10 +59,19 @@ class ControlAcceso
      * @return `true` si el proceso puede continuar (hay al menos un usuario),
      *         `false` si el usuario cancela la creación inicial o ocurre un error.
      */
-    private fun verificarFicheroUsuarios() {
-        TODO("Implementar este método")
+    private fun verificarFicheroUsuarios(): Boolean {
+        if (!ficheros.existeFichero(rutaArchivo) || ficheros.leerArchivo(rutaArchivo).isEmpty()) {
+            ui.mostrar("No existen usuarios registrados. Debe crear un usuario ADMIN inicial.")
+            return if (ui.preguntar("¿Desea registrar un usuario ADMIN?")) {
+                val nombre = ui.pedirInfo("Ingrese el nombre del admin: ")
+                val clave = ui.pedirInfoOculta("Ingrese la contraseña: ")
+                gestorUsuarios.agregarUsuario(nombre, clave, Perfil.ADMIN)
+            } else {
+                false
+            }
+        }
+        return true
     }
-
     /**
      * Solicita al usuario sus credenciales (usuario y contraseña) en un bucle hasta
      * que sean válidas o el usuario decida cancelar.
@@ -61,8 +81,20 @@ class ControlAcceso
      * @return Un par (nombreUsuario, perfil) si las credenciales son correctas,
      *         o `null` si el usuario decide no continuar.
      */
-    private fun iniciarSesion() {
-        TODO("Implementar este método")
-    }
 
+    private fun iniciarSesion(): Pair<String, String>? {
+        do {
+            val nombre = ui.pedirInfo("Usuario: ")
+            val clave = ui.pedirInfoOculta("Contraseña: ")
+            val perfil = gestorUsuarios.iniciarSesion(nombre, clave)
+
+            if (perfil != null) {
+                ui.mostrar("Acceso concedido. Bienvenido, $nombre.")
+                return nombre to perfil.toString()
+            } else {
+                ui.mostrarError("Credenciales incorrectas. Intente nuevamente.")
+                if (!ui.preguntar("¿Desea intentar nuevamente?")) return null
+            }
+        } while (true)
+    }
 }

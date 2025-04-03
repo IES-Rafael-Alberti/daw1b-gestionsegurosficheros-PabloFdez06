@@ -1,4 +1,4 @@
-package org.example.app
+package app
 
 /**
  * Clase (**data class**) de configuración que encapsula los menús y las acciones disponibles para un perfil

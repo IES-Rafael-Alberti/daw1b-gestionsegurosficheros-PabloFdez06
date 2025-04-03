@@ -1,6 +1,9 @@
+
+package app
+
+import app.GestorMenu
 import model.Seguro
 import model.SeguroHogar
-import org.example.app.ConfigMenuPerfil
 import org.example.model.SeguroAuto
 import org.example.model.SeguroVida
 
@@ -24,7 +27,7 @@ object ConfiguracionesApp {
      * Las claves del mapa deben coincidir con el nombre que aparece al final de cada línea
      * serializada en el fichero (por ejemplo: "SeguroAuto").
      */
-    val mapaCrearSeguros: Map<String, (List<String>) -> Seguro> = mapOf(
+    val mapaCrearSeguros: Map<String, (List<String>) -> Seguro?> = mapOf(
         "SeguroHogar" to SeguroHogar::crearSeguro,
         "SeguroAuto" to SeguroAuto::crearSeguro,
         "SeguroVida" to SeguroVida::crearSeguro
