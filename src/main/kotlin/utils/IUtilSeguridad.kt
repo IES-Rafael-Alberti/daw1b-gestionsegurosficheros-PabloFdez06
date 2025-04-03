@@ -1,4 +1,4 @@
-package org.example.Utils
+package utils
 
 interface IUtilSeguridad {
     fun encriptarClave(clave: String, nivelSeguridad: Int = 12): String

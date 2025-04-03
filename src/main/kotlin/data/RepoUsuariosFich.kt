@@ -3,7 +3,7 @@ package org.example.data
 import data.ICargarUsuariosIniciales
 import data.RepoUsuariosMem
 import model.Usuario
-import org.example.Utils.IUtilFicheros
+import utils.IUtilFicheros
 
 class RepoUsuariosFich(
     private val rutaArchivo: String,

@@ -1,4 +1,4 @@
-package org.example.Utils
+package utils
 
 import model.IExportable
 

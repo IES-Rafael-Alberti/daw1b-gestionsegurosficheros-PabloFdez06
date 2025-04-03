@@ -1,12 +1,9 @@
-package org.example.data
+package data
 
 import data.ICargarSegurosIniciales
-import data.ICargarUsuariosIniciales
-import data.RepoUsuariosMem
 import model.Seguro
 import model.SeguroHogar
-import model.Usuario
-import org.example.Utils.IUtilFicheros
+import utils.IUtilFicheros
 import org.example.model.SeguroAuto
 import org.example.model.SeguroVida
 
@@ -29,7 +26,7 @@ class RepoSegurosFich(
         return false
     }
 
-    override fun cargarSeguros(mapa: Map<String, (List<String>) -> Seguro>): Boolean {
+    override fun cargarSeguros(mapa: Map<String, (List<String>) -> Seguro?>): Boolean {
         val lineas = fich.leerArchivo(rutaArchivo)
 
         if (lineas.isNotEmpty()) {
@@ -51,6 +48,7 @@ class RepoSegurosFich(
         return false
     }
 
+
     private fun actualizarContadores(seguros: List<Seguro>) {
         // Actualizar los contadores de polizas del companion object según el tipo de seguro
         val maxHogar = seguros.filter { it.tipoSeguro() == "SeguroHogar" }.maxOfOrNull { it.numPoliza }
@@ -61,4 +59,6 @@ class RepoSegurosFich(
         if (maxAuto != null) SeguroAuto.numPolizaAuto = maxAuto
         if (maxVida != null) SeguroVida.numPolizaVida = maxVida
     }
+
+
 }

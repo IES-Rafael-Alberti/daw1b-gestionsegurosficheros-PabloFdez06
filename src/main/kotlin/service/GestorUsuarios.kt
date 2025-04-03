@@ -1,44 +1,52 @@
-package org.example.service
+package service
 
-import model.Usuario
 import data.IRepoUsuarios
 import model.Perfil
-import org.example.Utils.IUtilSeguridad
-import service.IServUsuarios
+import model.Usuario
+import utils.IUtilSeguridad
 
-class GestorUsuarios(
-    private val repoUsuarios: IRepoUsuarios,
-    private val utilSeguridad: IUtilSeguridad
-) : IServUsuarios {
+
+class GestorUsuarios(private val repoUsuarios: IRepoUsuarios) : IServUsuarios {
+
 
     override fun iniciarSesion(nombre: String, clave: String): Perfil? {
-        val usuario = repoUsuarios.buscar(nombre) ?: return null
-        return if (utilSeguridad.verificarClave(clave, usuario.clave)) usuario.perfil else null
+
+        val usuario = buscarUsuario(nombre)
+
+        if (usuario != null) {
+            return when (usuario.verificarClave(clave)) {
+                true -> usuario.perfil
+                else -> null
+            }
+        }
+        return null
     }
 
+
     override fun agregarUsuario(nombre: String, clave: String, perfil: Perfil): Boolean {
-        if (repoUsuarios.buscar(nombre) != null) return false
-        val claveEncriptada = utilSeguridad.encriptarClave(clave)
-        val nuevoUsuario = Usuario(nombre, claveEncriptada, perfil)
-        return repoUsuarios.agregar(nuevoUsuario)
+        return repoUsuarios.agregar(Usuario(nombre, clave, perfil))
     }
+
 
     override fun eliminarUsuario(nombre: String): Boolean {
         return repoUsuarios.eliminar(nombre)
     }
 
+
     override fun cambiarClave(usuario: Usuario, nuevaClave: String): Boolean {
-        val claveEncriptada = utilSeguridad.encriptarClave(nuevaClave)
-        return repoUsuarios.cambiarClave(usuario, claveEncriptada)
+        return repoUsuarios.cambiarClave(usuario, nuevaClave)
     }
+
 
     override fun buscarUsuario(nombre: String): Usuario? {
         return repoUsuarios.buscar(nombre)
     }
 
+
     override fun consultarTodos(): List<Usuario> {
         return repoUsuarios.obtenerTodos()
     }
+
 
     override fun consultarPorPerfil(perfil: Perfil): List<Usuario> {
         return repoUsuarios.obtener(perfil)

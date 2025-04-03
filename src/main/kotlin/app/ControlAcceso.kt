@@ -1,8 +1,8 @@
 package app
 
 import model.Perfil
-import org.example.UI.IEntradaSalida
-import org.example.Utils.IUtilFicheros
+import ui.IEntradaSalida
+import utils.IUtilFicheros
 import service.IServUsuarios
 /**
  * Clase responsable del control de acceso de usuarios: alta inicial, inicio de sesión

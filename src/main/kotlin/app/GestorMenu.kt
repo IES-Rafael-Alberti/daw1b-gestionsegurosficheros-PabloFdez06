@@ -1,7 +1,7 @@
 package app
 
 import model.*
-import org.example.UI.IEntradaSalida
+import ui.IEntradaSalida
 import service.IServSeguros
 import service.IServUsuarios
 import java.time.LocalDate

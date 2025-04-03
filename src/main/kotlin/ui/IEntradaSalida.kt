@@ -1,4 +1,4 @@
-package org.example.UI
+package ui
 
 interface IEntradaSalida {
     fun mostrar(msj: String, salto: Boolean = true, pausa: Boolean = false)

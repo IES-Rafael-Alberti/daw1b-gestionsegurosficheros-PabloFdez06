@@ -1,4 +1,4 @@
-package org.example.UI
+package ui
 
 import org.jline.reader.EndOfFileException
 import org.jline.reader.LineReaderBuilder
