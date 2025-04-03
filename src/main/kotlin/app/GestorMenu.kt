@@ -79,6 +79,7 @@ class GestorMenu(
 
     /** Crea un nuevo usuario solicitando los datos necesarios al usuario */
     fun nuevoUsuario() {
+
         val nombre = ui.pedirInfo("Ingrese el nombre de usuario: ")
         val clave = ui.pedirInfoOculta("Ingrese la contraseña: ")
         val perfilString = ui.pedirInfo("Ingrese el perfil del usuario (ADMIN, GESTION, CONSULTA): ")
